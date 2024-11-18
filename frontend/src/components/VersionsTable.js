@@ -9,7 +9,7 @@ const VersionsTable = ({ versions, versionDetailsData, lastUpdated, onOpen }) =>
   const versionsWithDetail = versionDetailsData.nodes.map((v) => v.parent.name);
 
   return (
-    <div className="overflow-auto rounded-xl bg-[#ffde7a]">
+    <div className="overflow-auto rounded-xl bg-[#2E68E9]">
       <div className="my-8 mb-0 overflow-hidden shadow-sm">
         <table className="w-full table-fixed border-collapse text-sm">
           <thead>
@@ -49,7 +49,7 @@ const VersionsTable = ({ versions, versionDetailsData, lastUpdated, onOpen }) =>
           </tbody>
         </table>
       </div>
-      <p className="pb-5 pr-5 pt-3 text-right text-sm font-light italic text-[#064a6e]">
+      <p className="pb-5 pr-5 pt-3 text-right text-sm font-light italic text-white">
         Last updated: {lastUpdated}
       </p>
     </div>
@@ -59,7 +59,7 @@ const VersionsTable = ({ versions, versionDetailsData, lastUpdated, onOpen }) =>
 export default VersionsTable;
 
 const Th = ({ children }) => (
-  <th className="border-b p-4 pb-3 pl-8 pt-0 text-left font-bold text-[#064a6e]">{children}</th>
+  <th className="border-b p-4 pb-3 pl-8 pt-0 text-left font-bold text-white">{children}</th>
 );
 
 const Td = ({ children, className = '' }) => (
