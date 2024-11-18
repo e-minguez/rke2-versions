@@ -3,7 +3,7 @@
 # RKE2 versions
 
 <p align="center">
-  <img alt="RKE2 Logo" src="frontned/src/images/icon-rke2.svg" height="140" />
+  <img alt="RKE2 Logo" src="frontend/src/images/icon-rke2.svg" height="140" />
   <h3 align="center">RKE2 versions</h3>
 </p>
 
@@ -20,4 +20,4 @@ See it [live](https://www.eduardominguez.es/rke2-versions/)!
 
 ## Background
 
-This is like (k3s-versions)[https://github.com/e-minguez/k3s-versions] but for RKE2 :)
+This is like [k3s-versions](https://github.com/e-minguez/k3s-versions) but for RKE2 :)
