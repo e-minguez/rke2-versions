@@ -29,7 +29,7 @@
 }
 .markdown code {
   @apply p-1 text-sm;
-  background-color: #fff3d2;
+  background-color: #2E68E9;
 }
 .markdown table {
   @apply mb-3 bg-white border-collapse border border-slate-300 table-auto text-sm shadow-sm;
