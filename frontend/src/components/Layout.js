@@ -14,12 +14,7 @@ const Layout = ({ children }) => (
     </nav> */}
     <header className="bg-white shadow">
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <Link to="/">
-          <div className="flex flex-row items-center">
-            <RKE2Icon className="h-9 pr-4" />
-            <h1 className="text-3xl font-bold tracking-tight text-[#064a6e]">RKE2 versions</h1>
-          </div>
-        </Link>
+        <HeaderLinkDropdown />
       </div>
     </header>
     <main>{children}</main>
