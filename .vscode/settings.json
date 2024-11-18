@@ -1,0 +1,6 @@
+{
+  "editor.formatOnSave": true,
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "javascript"
+  }
+}
