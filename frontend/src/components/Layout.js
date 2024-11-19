@@ -1,6 +1,5 @@
 import React from 'react';
-import RKE2Icon from '../images/icon-rke2.svg';
-import { Link } from 'gatsby';
+import HeaderLinkDropdown from './HeaderLinkDropdown';
 
 const Layout = ({ children }) => (
   <>

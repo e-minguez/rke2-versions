@@ -46,14 +46,14 @@ function HeaderLinkDropdown() {
   return (
     <Popover>
       <PopoverButton className="block rounded-lg border border-white p-3 hover:border hover:border-slate-400 hover:shadow focus:outline-none data-[open]:border-slate-400 data-[open]:shadow">
-        <K3sVersionsLink />
+        <RKE2VersionsLink />
       </PopoverButton>
       <PopoverPanel
         transition
         anchor="bottom start"
         className="mt-3 divide-y divide-white/5 rounded-lg border border-slate-400 bg-white p-3 shadow transition duration-200 ease-in-out [--anchor-gap:var(--spacing-5)] hover:bg-slate-100 data-[closed]:-translate-y-1 data-[closed]:opacity-0"
       >
-        <RKE2VersionsLink />
+        <K3sVersionsLink />
       </PopoverPanel>
     </Popover>
   );
