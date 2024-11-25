@@ -18,6 +18,8 @@ See it [live](https://www.eduardominguez.es/rke2-versions/)!
 
 > :warning: This is an unofficial tool, don't blame us!
 
+The json file can be also viewed [live](https://www.eduardominguez.es/rke2-versions/rke2.json)
+
 ## Background
 
 This is like [k3s-versions](https://github.com/e-minguez/k3s-versions) but for RKE2 :)
