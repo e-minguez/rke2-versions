@@ -15,7 +15,9 @@ from github import Github
 from github import Auth
 
 # using an access token
-auth = Auth.Token(os.environ["GITHUB_TOKEN"])
+auth = None
+if "GITHUB_TOKEN" in os.environ:
+	auth = Auth.Token(os.environ["GITHUB_TOKEN"])
 
 URL = "https://update.rke2.io/v1-release/channels"
 HEADERS = {"accept": "application/json"}
@@ -24,6 +26,26 @@ REPO = "rancher/rke2"
 GITHUBRELEASES = f"https://github.com/{REPO}/releases/tag/"
 
 OUTPUTFILE = "data/rke2.json"
+
+def get_ordered_data(data):
+	# Separate special channels from versioned channels
+	special_channels = []
+	versioned_channels = []
+	special_channel_names = ["stable", "latest", "testing"]
+
+	for item in data:
+		if item['name'] in special_channel_names:
+			special_channels.append(item)
+		else:
+			versioned_channels.append(item)
+
+	# Sort special channels according to the predefined list
+	special_channels.sort(key=lambda d: special_channel_names.index(d['name']))
+
+	# Sort versioned channels semantically (e.g., v1.10 > v1.2)
+	versioned_channels.sort(key=lambda d: [int(p) for p in d['name'].lstrip('v').split('.')], reverse=True)
+
+	return special_channels + versioned_channels
 
 def main():
 	# Open the previous json data
@@ -39,13 +61,13 @@ def main():
 		page.raise_for_status()
 	except requests.exceptions.HTTPError as err:
 		raise SystemExit(err)
-	
+
 	# Convert it to a dict directly as it is json
 	try:
 		data = page.json()
 	except requests.exceptions.JSONDecodeError as err:
 		raise SystemExit(err)
-	
+
 	# If the data didn't changed, exit soon
 	if data == previous:
 		print("CHANGED=false")
@@ -62,7 +84,7 @@ def main():
 	repo = g.get_repo(REPO)
 	releases=repo.get_releases()
 
-	ordereddata = data["data"][:3] + sorted(data["data"][3:], key=lambda d: d['name'], reverse=True)
+	ordereddata = get_ordered_data(data["data"])
 
 	for key in ordereddata:
 		# Some releases (k3s 1.16-testing & 1.17-testing don't have a latest version, skipping them
