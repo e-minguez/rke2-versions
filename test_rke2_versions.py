@@ -1,6 +1,14 @@
 import unittest
-from unittest.mock import patch, mock_open
-from rke2_versions.main import get_ordered_data
+import importlib.util
+import sys
+
+# Load the module from the file path
+spec = importlib.util.spec_from_file_location("rke2_versions", "rke2-versions.py")
+rke2_versions = importlib.util.module_from_spec(spec)
+sys.modules["rke2_versions"] = rke2_versions
+spec.loader.exec_module(rke2_versions)
+
+get_ordered_data = rke2_versions.get_ordered_data
 
 class TestRKE2Versions(unittest.TestCase):
     def test_channel_sorting(self):
@@ -19,7 +27,6 @@ class TestRKE2Versions(unittest.TestCase):
         # The expected order: special channels first, then versions sorted semantically
         expected_order = ["stable", "latest", "testing", "v1.20", "v1.10", "v1.2"]
 
-        # This will fail with the current implementation
         ordered_data = get_ordered_data(mock_data["data"])
         ordered_names = [d["name"] for d in ordered_data]
 

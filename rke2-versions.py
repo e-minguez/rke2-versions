@@ -27,43 +27,6 @@ GITHUBRELEASES = f"https://github.com/{REPO}/releases/tag/"
 
 OUTPUTFILE = "data/rke2.json"
 
-def main():
-	# Open the previous json data
-	try:
-		with open(FILE) as json_file:
-				previous = json.load(json_file)
-	except Exception:
-			previous = {}
-
-	# Get the URL
-	try:
-		page = requests.get(URL, headers=HEADERS)
-		page.raise_for_status()
-	except requests.exceptions.HTTPError as err:
-		raise SystemExit(err)
-	
-	# Convert it to a dict directly as it is json
-	try:
-		data = page.json()
-	except requests.exceptions.JSONDecodeError as err:
-		raise SystemExit(err)
-	
-	# If the data didn't changed, exit soon
-	if data == previous:
-		print("CHANGED=false")
-		sys.exit(0)
-	# Otherwise, save it for the future
-	else:
-		print("CHANGED=true")
-		with open(FILE, "w") as json_file:
-			json_file.write(json.dumps(data, sort_keys=True))
-
-	rke2versions = {"rke2-versions": [], "date": datetime.now().strftime("%d/%m/%Y %H:%M:%S")}
-
-	g = Github(auth=auth)
-	repo = g.get_repo(REPO)
-	releases=repo.get_releases()
-
 def get_ordered_data(data):
 	# Separate special channels from versioned channels
 	special_channels = []
