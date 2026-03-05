@@ -103,7 +103,8 @@ def main():
 
 			release = repo.get_release(key['latest'])
 
-			with open("data/"+key['latest']+".md", "w") as releasefile:
+			safe_filename = os.path.basename(key['latest']) + ".md"
+			with open(os.path.join("data", safe_filename), "w") as releasefile:
 				releasefile.writelines(["---\n",
 											f"version: {key['latest']}\n",
 											f"releaseDate: {release.published_at.strftime('%d/%m/%Y %H:%M:%S')}\n",
