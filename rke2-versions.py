@@ -86,15 +86,26 @@ def main():
 
 	ordereddata = get_ordered_data(data["data"])
 
+	releases_by_prefix = {}
+	for r in releases:
+		title = r.title
+		if title:
+			prefix = title[:6]
+			if prefix not in releases_by_prefix:
+				releases_by_prefix[prefix] = []
+			releases_by_prefix[prefix].append(r)
+
 	for key in ordereddata:
 		# Some releases (k3s 1.16-testing & 1.17-testing don't have a latest version, skipping them
 		if 'latest' in key:
 			previous = []
-			for i in list(filter(lambda r: re.match(key['latest'][:6], r.title),releases)):
-				previous.append({"version": i.title,
-											"github-release-link": f"{GITHUBRELEASES}{i.title}",
-											"prerelease": i.prerelease,
-											"released": i.published_at.strftime("%d/%m/%Y %H:%M:%S")})
+			prefix = key['latest'][:6]
+			for i in releases_by_prefix.get(prefix, []):
+				if i.title and re.match(prefix, i.title):
+					previous.append({"version": i.title,
+												"github-release-link": f"{GITHUBRELEASES}{i.title}",
+												"prerelease": i.prerelease,
+												"released": i.published_at.strftime("%d/%m/%Y %H:%M:%S")})
 			version = {"name": key['name'],
 							"version": key['latest'],
 							"github-release-link": f"{GITHUBRELEASES}{key['latest']}",
