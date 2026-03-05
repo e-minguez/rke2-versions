@@ -5,7 +5,6 @@ import os
 import requests
 import sys
 import re
-import jinja2
 
 from datetime import datetime
 
