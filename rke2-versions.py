@@ -82,7 +82,7 @@ def main():
 
 	g = Github(auth=auth)
 	repo = g.get_repo(REPO)
-	releases=repo.get_releases()
+	releases = list(repo.get_releases())
 
 	ordereddata = get_ordered_data(data["data"])
 
@@ -101,7 +101,14 @@ def main():
 							"all-versions": previous }
 			rke2versions['rke2-versions'].append(version)
 
-			release = repo.get_release(key['latest'])
+			release = None
+			for r in releases:
+				if r.tag_name == key['latest']:
+					release = r
+					break
+
+			if release is None:
+				release = repo.get_release(key['latest'])
 
 			with open("data/"+key['latest']+".md", "w") as releasefile:
 				releasefile.writelines(["---\n",
