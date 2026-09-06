@@ -38,6 +38,9 @@
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.8.0"
   },
+  "overrides": {
+    "msgpackr": "^1.12.1"
+  },
   "prettier": {
     "trailingComma": "es5",
     "printWidth": 100,
