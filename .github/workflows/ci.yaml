@@ -31,6 +31,7 @@ jobs:
             frontend:
               - 'frontend/**'
               - '.github/workflows/ci.yaml'
+              - '.github/workflows/main.yaml'
 
   # Also runs for frontend-only changes: frontend/src/pages/index.js imports
   # ../../../data/rke2.json, so gatsby cannot build until this job generates it.
